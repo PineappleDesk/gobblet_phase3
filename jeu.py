@@ -26,16 +26,22 @@ class Jeu:
                 raise GobbletError("L'identifiant {id_partie} ne correspond pas à une partie du joueur {idul}.")
 
 
-
-
     def __str__(self, plateau, joueurs):
         gobblet.formater_jeu(plateau, joueurs)
 
-    def jouer():
+    def jouer(plateau, id_partie, origine, destination, idul, secret):
 
+        api.débuter_partie(self.idul, self.secret)
         while True:
             tour = 1
             if tour == 1 :
+                coup1 = joueur1.récupérer_le_coup(plateau)
+                if type(coup1[0]) == int :
+                    gobblet.placer_gobblet(coup1[1][0], coup1[1][1], coup1[0])
+                else :
+                    gobblet.retirer_gobblet(coup1[0][0], coup1[0][1])
+                    gobblet.placer_gobblet(coup1[1][0], coup1[1][1])
                 tour = 2
             if tour == 2 :
+                api.jouer_coup(id_partie, origine, destination, idul, secret)
                 tour = 1
