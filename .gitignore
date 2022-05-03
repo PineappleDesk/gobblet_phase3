@@ -1,0 +1,12 @@
+# Ignorer l'entièreté des fichiers/dossiers
+/**/*
+
+# Ne PAS ignorer les fichiers Python et autre fichier important
+!/api.py
+!/main.py
+!/tests.py
+!/README.md
+!/gobblet.py
+!/joueur.py
+!/plateau.py
+!/.gitignore
