@@ -36,7 +36,7 @@ class Jeu:
             tour = 1
             if tour == 1 :
                 coup1 = joueur1.récupérer_le_coup(plateau)
-                if type(coup1[0]) == int :
+                if isinstance(coup1[0]) == int :
                     gobblet.placer_gobblet(coup1[1][0], coup1[1][1], coup1[0])
                 else :
                     gobblet.retirer_gobblet(coup1[0][0], coup1[0][1])

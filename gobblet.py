@@ -12,14 +12,14 @@ Functions:
 """
 
 from argparse import ArgumentParser
-from typing import Any, Callable, Iterable, Sequence, TypeVar, Union
+from typing import Any, Callable, Iterable, Sequence, isinstanceVar, Union
 import operator as op
 from functools import reduce, partial as part
 from itertools import count, repeat
 from api import jouer_coup
 
-A = TypeVar("A")
-B = TypeVar("B")
+A = isinstanceVar("A")
+B = isinstanceVar("B")
 
 
 def flip(f):
@@ -42,7 +42,7 @@ def forall(p: Callable[[A], bool], xs: Sequence[A]) -> bool:
     return all(map(p, xs))
 
 def listP(x):
-    return type(x) == "list"
+    return isinstance(x) == "list"
 
 def inRange(*args):
     return lambda x: x in range(*args)
@@ -140,11 +140,11 @@ class Gobblet:
             *GobbletError: Le numéro du joueur doit être un entier.
             *GobbletError: Le numéro du joueur doit être 1 ou 2.
         """
-        if not type(grosseur) is int:
+        if not isinstance(grosseur) is int:
             raise GobbletError("La grosseur doit être un entier.")
         elif not (0 <= grosseur <= 3):
             raise GobbletError("La grosseur doit être comprise entre 0 et 3.")
-        elif not type(no_joueur) is int:
+        elif not isinstance(no_joueur) is int:
             raise GobbletError("La grosseur doit être comprise entre 0 et 3.")
         elif not no_joueur in [1, 2]:
             raise GobbletError("Le numéro du joueur doit être 1 ou 2.")
@@ -167,7 +167,7 @@ class Gobblet:
         Returns:
             bool: si les deux gobelets sont de même taille.
         """
-        return (self.grosseur == autre.grosseur) if type(autre) is Gobblet else False
+        return (self.grosseur == autre.grosseur) if isinstance(autre) is Gobblet else False
 
     def __gt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -178,7 +178,7 @@ class Gobblet:
         Returns:
             bool: si ce gobelet est plus gros que l'autre.
         """
-        return self.grosseur > autre.grosseur if type(autre) is Gobblet else False
+        return self.grosseur > autre.grosseur if isinstance(autre) is Gobblet else False
 
     def __lt__(self, autre):
         """Comparer la grosseur de deux gobelets.
@@ -245,7 +245,7 @@ def interpréteur_de_commande():
                    et l'attribut lister qui est un booléen True/False.
     """
     parser = ArgumentParser(description="Gobblet")
-    parser.add_argument("IDUL", help="IDUL du joueur", type=str)
+    parser.add_argument("IDUL", help="IDUL du joueur", isinstance=str)
     parser.add_argument("-l", "--lister", action="store_true", help="lister les parties existantes")
 
     return parser.parse_args()

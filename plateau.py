@@ -6,7 +6,7 @@ Functions:
 
 import operator as op
 from functools import partial, reduce
-from types import NoneType
+from isinstances import Noneisinstance
 from typing import Union
 from gobblet import Gobblet, GobbletError, default, forall, inSet, interleave, map_2d
 
@@ -28,7 +28,7 @@ class Plateau:
     def valider_plateau(self, plateau: list([list(list)])):
     
         """Validateur de Plateau
-        -> list[list[Union[NoneType, Gobblet]]]:
+        -> list[list[Union[Noneisinstance, Gobblet]]]:
 
         Args:
             plateau (list): Plateau tel que représenté dans l'énoncé
@@ -42,13 +42,13 @@ class Plateau:
             *GobbletError: Le plateau ne possède pas le bon nombre de colonne dans les lignes
             *GobbletError: Les Gobblets doivent être des listes de paires ou une liste vide
         """
-        if type(plateau) != list:
+        if isinstance(plateau) != list:
             raise GobbletError("Le plateau doit être une liste")
         if len(plateau) != 4:
             raise GobbletError("Le plateau ne possède pas le bon nombre de ligne")
         if not forall(lambda xs: len(xs) == 4, plateau):
             raise GobbletError("Le plateau ne possède pas le bon nombre de colonne dans les lignes")
-        if not forall(lambda xs: forall(lambda x: (type(x) == list) and (len(x) in [0, 2]), xs), plateau):
+        if not forall(lambda xs: forall(lambda x: (isinstance(x) == list) and (len(x) in [0, 2]), xs), plateau):
             raise GobbletError("Les Gobblets doivent être des listes de paires ou une liste vide")
 
         def map_2d(x):
@@ -70,7 +70,7 @@ class Plateau:
 
         def fmt_actLines(lin, gobs: list[Gobblet]):
             def fmt_gob(g: Gobblet):
-                gstr = g.formater_un_gobblet() if type(g) == Gobblet else ' '
+                gstr = g.formater_un_gobblet() if isinstance(g) == Gobblet else ' '
                 return f" {gstr} "
             return f"{lin}{interleave(list(map(fmt_gob, gobs)), '|')}\n"
 
@@ -98,7 +98,7 @@ class Plateau:
             GobbletError: Le numéro de la colonne doit être 0, 1, 2 ou 3
             GobbletError: Le plateau ne possède pas de Gobblet pour la case demandée
         """
-        if type(no_colonne) != int or type(no_ligne) != int:
+        if isinstance(no_colonne) != int or isinstance(no_ligne) != int:
             raise GobbletError('Ligne et colonne doivent être des entiers')
 
         if no_ligne != 0 and no_ligne != 1 and no_ligne != 2 and no_ligne != 3:
@@ -126,7 +126,7 @@ class Plateau:
             *GobbletError: Le numéro de la colonne doit être 0, 1, 2 ou 3
             GobbletError: Le Gobblet ne peut pas être placé sur la case demandée
         """
-        if not (type(no_colonne) == int and type(no_ligne) == int):
+        if not (isinstance(no_colonne) == int and isinstance(no_ligne) == int):
             raise GobbletError("Ligne et colonne doivent être des entiers")
 
         if not no_ligne in range(4):
