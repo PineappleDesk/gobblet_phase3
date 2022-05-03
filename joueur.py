@@ -225,11 +225,37 @@ class Joueur:
 
 
 class Automate(Joueur):
-    def récupérer_le_coup(self, plateau):
-        
+
+    def rec(plateau):
+        n = 1
+        looking_empty = True
+
+        for i in plateau :
+            if i:
+                eat_or_step = random.randint(1,2)
+                if eat_or_step == 1:
+                    origine = random.randint(1,4)
+                    destination = i
+                    return (origine, destination)
+                    
+                else:
+                    while looking_empty :
+                        new_ind = plateau.index(i)+n
+                        if plateau[new_ind] :
+                            n += 1
+                        else :
+                            origine = random.randint(1,4)
+                            destination = plateau[new_ind]
+            
+            else:
+                origine = random.randint(1,4)
+                destination = i
+                return (origine, destination)
+
+    def rec_vide(plateau):
         continues = False
         while True:
-            origine = [random.randint(1,5) , random.randint(1,5)]
+            origine = random.randint(1,4)
             destination = [random.randint(1,5) , random.randint(1,5)]
 
             try: 
@@ -241,7 +267,7 @@ class Automate(Joueur):
 
                 if self.gobelets[self.no_pile[0]] != self.no_joueur:
                     raise GobbletError("Le gobelet d'origine n'appartient pas au joueur.")
-                
+                        
                 continues = True
 
             except :
@@ -250,6 +276,13 @@ class Automate(Joueur):
             if continues:
                 break
 
+    def récupérer_le_coup(self, plateau):
+        
+        for i in plateau :
 
-        return (origine, destination)
+            if i :
+                rec(plateau)
+
+            else :
+                rec_vide(plateau)
 
