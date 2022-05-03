@@ -106,6 +106,7 @@ class Plateau:
 
         if no_colonne != 0 and no_colonne != 1 and no_colonne != 2 and no_colonne != 3:
             raise GobbletError('Le numéro de la colonne doit être 0, 1, 2 ou 3')
+            
         if self.plateau[no_ligne][no_colonne] is None:
             raise GobbletError('Le plateau ne possède pas de Gobblet pour la case demandée')
 

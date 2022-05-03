@@ -9,4 +9,5 @@
 !/gobblet.py
 !/joueur.py
 !/plateau.py
+!/jeu.py
 !/.gitignore

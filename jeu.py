@@ -42,6 +42,10 @@ class Jeu:
                     gobblet.retirer_gobblet(coup1[0][0], coup1[0][1])
                     gobblet.placer_gobblet(coup1[1][0], coup1[1][1])
                 tour = 2
+
             if tour == 2 :
                 api.jouer_coup(id_partie, origine, destination, idul, secret)
                 tour = 1
+            
+            with open('Sauvegarde {id_partie}', 'w') as outfile:
+                json.dump(plateau.état_plateau(), outfile)

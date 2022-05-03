@@ -225,6 +225,9 @@ class Joueur:
 
 
 class Automate(Joueur):
+    
+    def __init__(self, nom, no_joueur, gobelets):
+        pass
 
     def rec(plateau):
         n = 1
@@ -285,4 +288,3 @@ class Automate(Joueur):
 
             else :
                 rec_vide(plateau)
-
