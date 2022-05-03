@@ -14,6 +14,12 @@ from plateau import Plateau
 
 # Mettre ici votre secret récupérer depuis le site de PAX
 SECRET = "86b4350c-5ea6-4b70-b75d-d0ca393301c6"
+def interpréteur_de_commande():
+    parser = ArgumentParser(description='Gobblet')
+    parser.add_argument('-l', '--lister', action = 'store_true', help = 'Lister les parties existantes')
+    parser.add_argument('-a', '--automatique', action = 'store_true', help = 'Activer le mode automatique')
+    parser.add_argument('IDUL', help = 'IDUL du joueur')
+    return parser.parse_args()
 
 if __name__ == "__main__":
     args = interpréteur_de_commande()
