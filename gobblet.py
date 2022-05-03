@@ -100,7 +100,12 @@ class GobbletError(Exception):
     """
     Cette exception est pour les erreurs de Gobblet. 
     """
-    pass
+    def __init__(self, message):
+        super().__init__(self)
+        self.message = message
+
+    def __str__(self):
+        return f'GobbletError: {self.message}'
 
 
 class Gobblet:
